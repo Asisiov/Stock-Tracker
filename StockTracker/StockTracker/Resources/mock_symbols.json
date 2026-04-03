@@ -1,0 +1,177 @@
+[
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "previousPrice": 189.32,
+    "currentPrice": 191.17,
+    "details": "Consumer technology company known for iPhone, Mac, iPad, services and wearables."
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corporation",
+    "previousPrice": 417.85,
+    "currentPrice": 403.96,
+    "details": "Global software and cloud company behind Windows, Microsoft 365, Azure and enterprise platforms."
+  },
+  {
+    "ticker": "GOOG",
+    "name": "Alphabet Inc.",
+    "previousPrice": 152.4,
+    "currentPrice": 150.0,
+    "details": "Technology holding company focused on search, ads, Android, cloud and AI products."
+  },
+  {
+    "ticker": "AMZN",
+    "name": "Amazon.com, Inc.",
+    "previousPrice": 178.26,
+    "currentPrice": 174.81,
+    "details": "E-commerce and cloud computing company operating Amazon Marketplace and AWS."
+  },
+  {
+    "ticker": "TSLA",
+    "name": "Tesla, Inc.",
+    "previousPrice": 171.73,
+    "currentPrice": 174.57,
+    "details": "Electric vehicle and energy company focused on EVs, batteries and autonomous software."
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA Corporation",
+    "previousPrice": 903.14,
+    "currentPrice": 914.31,
+    "details": "Semiconductor company known for GPUs, AI hardware and data center acceleration."
+  },
+  {
+    "ticker": "META",
+    "name": "Meta Platforms, Inc.",
+    "previousPrice": 498.2,
+    "currentPrice": 511.88,
+    "details": "Technology company behind Facebook, Instagram, WhatsApp and metaverse initiatives."
+  },
+  {
+    "ticker": "NFLX",
+    "name": "Netflix, Inc.",
+    "previousPrice": 621.88,
+    "currentPrice": 603.9,
+    "details": "Streaming entertainment company producing and distributing original and licensed content."
+  },
+  {
+    "ticker": "AMD",
+    "name": "Advanced Micro Devices, Inc.",
+    "previousPrice": 166.94,
+    "currentPrice": 166.03,
+    "details": "Semiconductor company focused on CPUs, GPUs and adaptive computing platforms."
+  },
+  {
+    "ticker": "INTC",
+    "name": "Intel Corporation",
+    "previousPrice": 41.67,
+    "currentPrice": 40.3,
+    "details": "Chip manufacturer building processors, platforms and infrastructure technologies."
+  },
+  {
+    "ticker": "ORCL",
+    "name": "Oracle Corporation",
+    "previousPrice": 128.55,
+    "currentPrice": 126.02,
+    "details": "Enterprise software and cloud infrastructure company serving database and business systems."
+  },
+  {
+    "ticker": "IBM",
+    "name": "International Business Machines",
+    "previousPrice": 191.24,
+    "currentPrice": 191.31,
+    "details": "Enterprise technology company focused on consulting, hybrid cloud, AI and infrastructure."
+  },
+  {
+    "ticker": "ADBE",
+    "name": "Adobe Inc.",
+    "previousPrice": 489.37,
+    "currentPrice": 473.15,
+    "details": "Software company known for creative tools, document platforms and digital experience products."
+  },
+  {
+    "ticker": "CRM",
+    "name": "Salesforce, Inc.",
+    "previousPrice": 301.46,
+    "currentPrice": 295.1,
+    "details": "Cloud software company focused on CRM, automation, analytics and enterprise workflows."
+  },
+  {
+    "ticker": "UBER",
+    "name": "Uber Technologies, Inc.",
+    "previousPrice": 76.84,
+    "currentPrice": 77.65,
+    "details": "Mobility and delivery platform providing ride-sharing, food delivery and logistics services."
+  },
+  {
+    "ticker": "LYFT",
+    "name": "Lyft, Inc.",
+    "previousPrice": 18.29,
+    "currentPrice": 18.35,
+    "details": "Transportation network company focused on ride-sharing and urban mobility services."
+  },
+  {
+    "ticker": "SHOP",
+    "name": "Shopify Inc.",
+    "previousPrice": 77.16,
+    "currentPrice": 75.65,
+    "details": "Commerce platform helping merchants build online stores and manage retail operations."
+  },
+  {
+    "ticker": "PYPL",
+    "name": "PayPal Holdings, Inc.",
+    "previousPrice": 63.91,
+    "currentPrice": 64.31,
+    "details": "Digital payments company supporting online checkout, transfers and merchant services."
+  },
+  {
+    "ticker": "SQ",
+    "name": "Block, Inc.",
+    "previousPrice": 81.34,
+    "currentPrice": 83.1,
+    "details": "Financial technology company operating payments, merchant tools and consumer finance products."
+  },
+  {
+    "ticker": "BABA",
+    "name": "Alibaba Group Holding Limited",
+    "previousPrice": 74.58,
+    "currentPrice": 72.0,
+    "details": "Chinese technology company focused on e-commerce, logistics, cloud and digital commerce."
+  },
+  {
+    "ticker": "SONY",
+    "name": "Sony Group Corporation",
+    "previousPrice": 86.43,
+    "currentPrice": 88.28,
+    "details": "Global entertainment and electronics company spanning gaming, imaging, music and films."
+  },
+  {
+    "ticker": "QCOM",
+    "name": "QUALCOMM Incorporated",
+    "previousPrice": 168.72,
+    "currentPrice": 171.06,
+    "details": "Semiconductor and wireless technology company known for mobile chipsets and connectivity IP."
+  },
+  {
+    "ticker": "AVGO",
+    "name": "Broadcom Inc.",
+    "previousPrice": 1328.11,
+    "currentPrice": 1313.26,
+    "details": "Semiconductor and infrastructure software company serving networking, data center and enterprise markets."
+  },
+  {
+    "ticker": "SAP",
+    "name": "SAP SE",
+    "previousPrice": 184.63,
+    "currentPrice": 180.18,
+    "details": "Enterprise software company focused on ERP, operations and business process platforms."
+  },
+  {
+    "ticker": "CSCO",
+    "name": "Cisco Systems, Inc.",
+    "previousPrice": 49.87,
+    "currentPrice": 51.47,
+    "details": "Networking and enterprise infrastructure company building connectivity, security and collaboration products."
+  }
+]
