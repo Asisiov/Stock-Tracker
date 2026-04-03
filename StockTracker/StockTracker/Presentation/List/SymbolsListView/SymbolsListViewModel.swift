@@ -55,8 +55,8 @@ final class SymbolsListViewModel {
     private func rebuildCells() {
         let sortedSymbols = sort(symbols, by: sortOption)
         cellViewModels = sortedSymbols.map { symbol in
-            let price = priceFormatter.string(from: symbol.currentPrice)
-            let priceDelta = priceChangeFormatter.string(from: symbol.delta)
+            let price = priceFormatter.string(from: symbol.currentPrice, currencyCode: symbol.currencyCode)
+            let priceDelta = priceChangeFormatter.string(from: symbol.delta, currencyCode: symbol.currencyCode)
             
             return SymbolCellViewModel(
                 title: symbol.ticker,
@@ -74,9 +74,9 @@ final class SymbolsListViewModel {
 }
 
 extension SymbolsListViewModel {
-    static func build() -> SymbolsListViewModel {
-        SymbolsListViewModel(priceFormatter: PriceFormatter(locale: .current),
-                             priceChangeFormatter: PriceChangeFormatter(locale: .current),
+    static func build(locale: Locale = Locale(identifier: "en_US")) -> SymbolsListViewModel {
+        SymbolsListViewModel(priceFormatter: PriceFormatter(locale: locale),
+                             priceChangeFormatter: PriceChangeFormatter(locale: locale),
                              loader: SymbolsJSONLoader())
     }
 }

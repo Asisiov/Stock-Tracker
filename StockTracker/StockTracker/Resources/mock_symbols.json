@@ -4,6 +4,7 @@
     "name": "Apple Inc.",
     "previousPrice": 189.32,
     "currentPrice": 191.17,
+    "currencyCode": "USD",
     "details": "Consumer technology company known for iPhone, Mac, iPad, services and wearables."
   },
   {
@@ -11,6 +12,7 @@
     "name": "Microsoft Corporation",
     "previousPrice": 417.85,
     "currentPrice": 403.96,
+    "currencyCode": "USD",
     "details": "Global software and cloud company behind Windows, Microsoft 365, Azure and enterprise platforms."
   },
   {
@@ -18,6 +20,7 @@
     "name": "Alphabet Inc.",
     "previousPrice": 152.4,
     "currentPrice": 150.0,
+    "currencyCode": "USD",
     "details": "Technology holding company focused on search, ads, Android, cloud and AI products."
   },
   {
@@ -25,6 +28,7 @@
     "name": "Amazon.com, Inc.",
     "previousPrice": 178.26,
     "currentPrice": 174.81,
+    "currencyCode": "USD",
     "details": "E-commerce and cloud computing company operating Amazon Marketplace and AWS."
   },
   {
@@ -32,6 +36,7 @@
     "name": "Tesla, Inc.",
     "previousPrice": 171.73,
     "currentPrice": 174.57,
+    "currencyCode": "USD",
     "details": "Electric vehicle and energy company focused on EVs, batteries and autonomous software."
   },
   {
@@ -39,6 +44,7 @@
     "name": "NVIDIA Corporation",
     "previousPrice": 903.14,
     "currentPrice": 914.31,
+    "currencyCode": "USD",
     "details": "Semiconductor company known for GPUs, AI hardware and data center acceleration."
   },
   {
@@ -46,6 +52,7 @@
     "name": "Meta Platforms, Inc.",
     "previousPrice": 498.2,
     "currentPrice": 511.88,
+    "currencyCode": "USD",
     "details": "Technology company behind Facebook, Instagram, WhatsApp and metaverse initiatives."
   },
   {
@@ -53,6 +60,7 @@
     "name": "Netflix, Inc.",
     "previousPrice": 621.88,
     "currentPrice": 603.9,
+    "currencyCode": "USD",
     "details": "Streaming entertainment company producing and distributing original and licensed content."
   },
   {
@@ -60,6 +68,7 @@
     "name": "Advanced Micro Devices, Inc.",
     "previousPrice": 166.94,
     "currentPrice": 166.03,
+    "currencyCode": "USD",
     "details": "Semiconductor company focused on CPUs, GPUs and adaptive computing platforms."
   },
   {
@@ -67,6 +76,7 @@
     "name": "Intel Corporation",
     "previousPrice": 41.67,
     "currentPrice": 40.3,
+    "currencyCode": "USD",
     "details": "Chip manufacturer building processors, platforms and infrastructure technologies."
   },
   {
@@ -74,6 +84,7 @@
     "name": "Oracle Corporation",
     "previousPrice": 128.55,
     "currentPrice": 126.02,
+    "currencyCode": "USD",
     "details": "Enterprise software and cloud infrastructure company serving database and business systems."
   },
   {
@@ -81,6 +92,7 @@
     "name": "International Business Machines",
     "previousPrice": 191.24,
     "currentPrice": 191.31,
+    "currencyCode": "USD",
     "details": "Enterprise technology company focused on consulting, hybrid cloud, AI and infrastructure."
   },
   {
@@ -88,6 +100,7 @@
     "name": "Adobe Inc.",
     "previousPrice": 489.37,
     "currentPrice": 473.15,
+    "currencyCode": "USD",
     "details": "Software company known for creative tools, document platforms and digital experience products."
   },
   {
@@ -95,6 +108,7 @@
     "name": "Salesforce, Inc.",
     "previousPrice": 301.46,
     "currentPrice": 295.1,
+    "currencyCode": "USD",
     "details": "Cloud software company focused on CRM, automation, analytics and enterprise workflows."
   },
   {
@@ -102,6 +116,7 @@
     "name": "Uber Technologies, Inc.",
     "previousPrice": 76.84,
     "currentPrice": 77.65,
+    "currencyCode": "USD",
     "details": "Mobility and delivery platform providing ride-sharing, food delivery and logistics services."
   },
   {
@@ -109,6 +124,7 @@
     "name": "Lyft, Inc.",
     "previousPrice": 18.29,
     "currentPrice": 18.35,
+    "currencyCode": "USD",
     "details": "Transportation network company focused on ride-sharing and urban mobility services."
   },
   {
@@ -116,6 +132,7 @@
     "name": "Shopify Inc.",
     "previousPrice": 77.16,
     "currentPrice": 75.65,
+    "currencyCode": "USD",
     "details": "Commerce platform helping merchants build online stores and manage retail operations."
   },
   {
@@ -123,6 +140,7 @@
     "name": "PayPal Holdings, Inc.",
     "previousPrice": 63.91,
     "currentPrice": 64.31,
+    "currencyCode": "USD",
     "details": "Digital payments company supporting online checkout, transfers and merchant services."
   },
   {
@@ -130,6 +148,7 @@
     "name": "Block, Inc.",
     "previousPrice": 81.34,
     "currentPrice": 83.1,
+    "currencyCode": "USD",
     "details": "Financial technology company operating payments, merchant tools and consumer finance products."
   },
   {
@@ -137,6 +156,7 @@
     "name": "Alibaba Group Holding Limited",
     "previousPrice": 74.58,
     "currentPrice": 72.0,
+    "currencyCode": "USD",
     "details": "Chinese technology company focused on e-commerce, logistics, cloud and digital commerce."
   },
   {
@@ -144,6 +164,7 @@
     "name": "Sony Group Corporation",
     "previousPrice": 86.43,
     "currentPrice": 88.28,
+    "currencyCode": "USD",
     "details": "Global entertainment and electronics company spanning gaming, imaging, music and films."
   },
   {
@@ -151,6 +172,7 @@
     "name": "QUALCOMM Incorporated",
     "previousPrice": 168.72,
     "currentPrice": 171.06,
+    "currencyCode": "USD",
     "details": "Semiconductor and wireless technology company known for mobile chipsets and connectivity IP."
   },
   {
@@ -158,6 +180,7 @@
     "name": "Broadcom Inc.",
     "previousPrice": 1328.11,
     "currentPrice": 1313.26,
+    "currencyCode": "USD",
     "details": "Semiconductor and infrastructure software company serving networking, data center and enterprise markets."
   },
   {
@@ -165,6 +188,7 @@
     "name": "SAP SE",
     "previousPrice": 184.63,
     "currentPrice": 180.18,
+    "currencyCode": "USD",
     "details": "Enterprise software company focused on ERP, operations and business process platforms."
   },
   {
@@ -172,6 +196,7 @@
     "name": "Cisco Systems, Inc.",
     "previousPrice": 49.87,
     "currentPrice": 51.47,
+    "currencyCode": "USD",
     "details": "Networking and enterprise infrastructure company building connectivity, security and collaboration products."
   }
 ]

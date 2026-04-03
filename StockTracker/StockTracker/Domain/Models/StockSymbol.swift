@@ -15,6 +15,7 @@ struct StockSymbol: Identifiable, Hashable, Codable {
     let details: String
     let previousPrice: Decimal
     let currentPrice: Decimal
+    let currencyCode: String
     
     var delta: Decimal { currentPrice - previousPrice }
 }

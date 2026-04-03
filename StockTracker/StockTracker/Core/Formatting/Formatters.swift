@@ -8,11 +8,11 @@
 import Foundation
 
 protocol PriceFormatting {
-    func string(from value: Decimal) -> String
+    func string(from value: Decimal, currencyCode: String) -> String
 }
 
 protocol PriceChangeFormatting {
-    func string(from value: Decimal) -> String
+    func string(from value: Decimal, currencyCode: String) -> String
 }
 
 protocol NumberFormatting {
@@ -42,8 +42,9 @@ final class PriceFormatter: PriceFormatting {
         )
     }
 
-    func string(from value: Decimal) -> String {
-        formatter.string(from: value as NSDecimalNumber) ?? "—"
+    func string(from value: Decimal, currencyCode: String) -> String {
+        formatter.currencyCode = currencyCode
+        return formatter.string(from: value as NSDecimalNumber) ?? "—"
     }
 }
 
@@ -76,11 +77,12 @@ final class PriceChangeFormatter: PriceChangeFormatting {
         self.locale = locale
     }
 
-    func string(from value: Decimal) -> String {
+    func string(from value: Decimal, currencyCode: String) -> String {
         let roundedValue = value.rounded(scale: scale)
         let normalizedValue: Decimal = roundedValue == 0 ? 0 : roundedValue
 
         let formatter = normalizedValue == 0 ? zeroFormatter : signedFormatter
+        formatter.currencyCode = currencyCode
         return formatter.string(from: normalizedValue as NSDecimalNumber) ?? "—"
     }
     

@@ -25,7 +25,7 @@ final class NumberFormatterFactory: NumberFormatterFactoryProtocol {
     ) -> NumberFormatter {
         let formatter = NumberFormatter()
         formatter.locale = locale
-        formatter.numberStyle = .decimal
+        formatter.numberStyle = .currency
         formatter.minimumFractionDigits = minimumFractionDigits
         formatter.maximumFractionDigits = maximumFractionDigits
         formatter.usesGroupingSeparator = usesGroupingSeparator

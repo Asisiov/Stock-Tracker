@@ -18,7 +18,7 @@ struct SymbolsListView: View {
                 HStack {
                     // TODO: Localisation
                     Text("Custom Text")
-                        .font(AppTypography.largeTitle)
+                        .font(AppTypography.largeTitle)                    
                     Spacer()
                     ConnectionIndicatorView(status: $status, size: 10)
                 }
