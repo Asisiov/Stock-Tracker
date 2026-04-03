@@ -26,13 +26,7 @@ struct SymbolsListView: View {
                 
                 ScrollView {
                     VStack {
-                        SortControlView(
-                            selected: Binding(
-                                get: { viewModel.sortOption },
-                                set: { viewModel.setSortOption($0) }
-                            )
-                        )
-//                        SortControlView(selected: $sortOption)
+                        SortControlView(selected: $viewModel.sortOption)
                         LazyVStack(spacing: AppSpacing.sm) {
                             ForEach(viewModel.cellViewModels) { item in
                                 RoundedRectangle(cornerRadius: 1)

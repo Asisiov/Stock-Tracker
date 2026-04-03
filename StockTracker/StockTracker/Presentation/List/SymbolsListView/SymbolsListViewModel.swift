@@ -12,7 +12,12 @@ import SwiftUI
 final class SymbolsListViewModel {
     var cellViewModels: [SymbolCellViewModel] = []
     private var symbols: [StockSymbol] = []
-    private(set) var sortOption: SymbolSortOption = .price
+    var sortOption: SymbolSortOption = .price {
+        didSet {
+            guard oldValue != sortOption else { return }
+            rebuildCells()
+        }
+    }
     
     var error: Error?
     
@@ -35,12 +40,6 @@ final class SymbolsListViewModel {
         } catch {
             self.error = error
         }
-    }
-    
-    func setSortOption(_ option: SymbolSortOption) {
-        guard sortOption != option else { return }
-        sortOption = option
-        rebuildCells()
     }
     
     private func tone(for price: Decimal) -> SymbolBadgeStyle.Tone {
