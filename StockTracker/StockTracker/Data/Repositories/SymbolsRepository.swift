@@ -1,5 +1,5 @@
 //
-//  ymbolsRepository.swift
+//  SymbolsRepository.swift
 //  StockTracker
 //
 //  Created by Oleksandr on 04.04.2026.
@@ -9,7 +9,7 @@ import Foundation
 
 // MARK:  -  SymbolsRepository  -  -
 
-actor SymbolsRepository {
+actor SymbolsRepository: SymbolsRepositoryProtocol {
     private let priceFeedService: any PriceFeedService
 
     private let orderedIDs: [String]
@@ -59,6 +59,10 @@ actor SymbolsRepository {
 
     func symbol(id: String) -> StockSymbol? {
         symbolsByID[id]
+    }
+    
+    func currentConnectionState() -> FeedConnectionState {
+        connectionState
     }
 
     func startFeed() async throws {

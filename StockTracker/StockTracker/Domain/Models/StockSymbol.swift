@@ -13,8 +13,8 @@ struct StockSymbol: Identifiable, Hashable, Codable {
     let ticker: String
     let name: String
     let details: String
-    let previousPrice: Decimal
-    let currentPrice: Decimal
+    var previousPrice: Decimal
+    var currentPrice: Decimal
     let currencyCode: String
     
     var delta: Decimal { currentPrice - previousPrice }
