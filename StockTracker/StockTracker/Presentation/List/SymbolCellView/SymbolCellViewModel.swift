@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+@MainActor
 @Observable
-final class SymbolCellViewModel: Identifiable {
+final class SymbolCellViewModel: Identifiable, Equatable {
     var id: String { title }
     var title: String
     var subtitle: String
@@ -26,6 +27,14 @@ final class SymbolCellViewModel: Identifiable {
         self.price = price
         self.priceDelta = priceDelta
         self.tone = tone
+    }
+    
+    static func == (lhs: SymbolCellViewModel, rhs: SymbolCellViewModel) -> Bool {
+        lhs.title == rhs.title &&
+        lhs.subtitle == rhs.subtitle &&
+        lhs.price == rhs.price &&
+        lhs.priceDelta == rhs.priceDelta &&
+        lhs.tone == rhs.tone
     }
 }
 

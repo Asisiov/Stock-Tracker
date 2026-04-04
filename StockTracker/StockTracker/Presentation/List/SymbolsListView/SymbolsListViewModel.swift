@@ -7,11 +7,21 @@
 
 import SwiftUI
 
+enum SymbolsListState: Equatable {
+    case idle
+    case loading
+    case content([SymbolCellViewModel])
+    case empty
+    case failed
+}
+
 @MainActor
 @Observable
 final class SymbolsListViewModel {
-    var cellViewModels: [SymbolCellViewModel] = []
-    private var symbols: [StockSymbol] = []
+    
+    private(set) var state: SymbolsListState = .idle
+    private(set) var connectionStatus: ConnectionStatus = .disconnected
+    
     var sortOption: SymbolSortOption = .price {
         didSet {
             guard oldValue != sortOption else { return }
@@ -19,7 +29,7 @@ final class SymbolsListViewModel {
         }
     }
     
-    var error: Error?
+    private var symbols: [StockSymbol] = []
     
     let priceFormatter: PriceFormatting
     let priceChangeFormatter: PriceChangeFormatting
@@ -34,11 +44,15 @@ final class SymbolsListViewModel {
     }
     
     func loadStocks() async {
+        guard state != .loading else { return }
+        state = .loading
+        
         do {
             symbols = try await loader.loadSymbols()
             rebuildCells()
         } catch {
-            self.error = error
+            symbols = []
+            state = .failed
         }
     }
     
@@ -53,8 +67,13 @@ final class SymbolsListViewModel {
     }
     
     private func rebuildCells() {
+        guard symbols.isEmpty == false else {
+            state = .empty
+            return
+        }
+        
         let sortedSymbols = sort(symbols, by: sortOption)
-        cellViewModels = sortedSymbols.map { symbol in
+        let items = sortedSymbols.map { symbol in
             let price = priceFormatter.string(from: symbol.currentPrice, currencyCode: symbol.currencyCode)
             let priceDelta = priceChangeFormatter.string(from: symbol.delta, currencyCode: symbol.currencyCode)
             
@@ -66,6 +85,8 @@ final class SymbolsListViewModel {
                 tone: .positive
             )
         }
+        
+        state = .content(items)
     }
     
     private func sort(_ symbols: [StockSymbol], by option: SymbolSortOption) -> [StockSymbol] {
