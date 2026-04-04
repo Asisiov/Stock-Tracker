@@ -9,9 +9,17 @@ import SwiftUI
 
 struct SymbolsListView: View {
     
-    @State private var viewModel: SymbolsListViewModel = .build()
-    @State private var status: ConnectionStatus = .disconnected
+    @State private var viewModel: SymbolsListViewModel
+    @State private var status: ConnectionStatus
     let onSelectSymbol: (String) -> Void
+    
+    init(viewModel: SymbolsListViewModel,
+         status: ConnectionStatus = .disconnected,
+         onSelectSymbol: @escaping (String) -> Void) {
+        self.viewModel = viewModel
+        self.status = status
+        self.onSelectSymbol = onSelectSymbol
+    }
     
     var body: some View {
         VStack {
@@ -24,7 +32,7 @@ struct SymbolsListView: View {
         }
         .task {
             guard case .idle = viewModel.state else { return }
-            await viewModel.loadStocks()
+            viewModel.onTask()
         }
     }
     
@@ -32,8 +40,10 @@ struct SymbolsListView: View {
         HStack {
             Text(LocalizedStrings.Markets.title)
                 .font(AppTypography.largeTitle)
+            
             Spacer()
-            ConnectionIndicatorView(status: $status, size: 10)
+            
+            ConnectionStatusChip(status: viewModel.connectionStatus)
         }
     }
     
@@ -71,9 +81,7 @@ struct SymbolsListView: View {
                   systemImage: "person.badge.plus")
         } actions: {
             Button(LocalizedStrings.Markets.tryAgaine) {
-                Task {
-                    await viewModel.loadStocks()
-                }
+                viewModel.onTask()
             }
         }
     }
@@ -85,9 +93,7 @@ struct SymbolsListView: View {
                 .foregroundStyle(Color.primary)
             
             Button(LocalizedStrings.Markets.tryAgaine) {
-                Task {
-                    await viewModel.loadStocks()
-                }
+                viewModel.onTask()
             }
             .buttonStyle(.borderedProminent)
         }
@@ -95,7 +101,7 @@ struct SymbolsListView: View {
         .padding()
     }
     
-    private func listView(items: [SymbolCellViewModel]) -> some View {
+    private func listView(items: [SymbolRowItem]) -> some View {
         ScrollView {
             LazyVStack(spacing: AppSpacing.sm) {
                 ForEach(items) { item in
@@ -106,22 +112,93 @@ struct SymbolsListView: View {
                     Button {
                         onSelectSymbol(item.id)
                     } label: {
-                        SymbolsCellView(viewModel: item)
+                        SymbolsCellView(
+                            viewModel: SymbolCellViewModel(
+                                title: item.title,
+                                subtitle: item.subtitle,
+                                price: item.price,
+                                priceDelta: item.priceDelta,
+                                tone: item.tone
+                            )
+                        )
                     }
                     .buttonStyle(.plain)
                 }
             }
             .padding()
+            
+            liveFeedSection
+                .padding()
+        }
+    }
+    
+    private var liveFeedSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.md) {
+            Text(viewModel.connectionStatus.feedTitle)
+                .font(AppTypography.title)
+                .foregroundStyle(Color.textPrimary)
+            
+            Text(viewModel.connectionStatus.feedDescriptionText)
+                .font(AppTypography.headline)
+                .foregroundStyle(Color.textSecondary)
+            
+            Button(action: viewModel.onFeedButtonTap) {
+                HStack(spacing: AppSpacing.sm) {
+                    if viewModel.isPerformingFeedAction {
+                        ProgressView()
+                            .tint(.white)
+                    } else {
+                        Image(systemName: viewModel.connectionStatus.feedButtonIconName)
+                    }
+                    
+                    Text(viewModel.connectionStatus.feedButtonTitle)
+                        .font(AppTypography.title)
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .frame(height: 56)
+                .background(viewModel.connectionStatus.inverseBackgroundColor)
+                .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
+            .disabled(viewModel.isPerformingFeedAction)
         }
     }
 }
 
-#Preview("Light color scheme") {
-    SymbolsListView(onSelectSymbol: { _ in })
+// MARK:  -  SymbolsListView+Preview  -  -
+
+private extension SymbolsListViewModel {
+    static var previewConnectedViewModel: SymbolsListViewModel {
+        SymbolsListPreviewFactory.make(connectionState: .connected)
+    }
+    
+    static var previewDisconnectedViewModel: SymbolsListViewModel {
+        SymbolsListPreviewFactory.make(connectionState: .disconnected)
+    }
+}
+
+#Preview("Light Color Scheme - Disconnected") {
+    SymbolsListView(viewModel: .previewDisconnectedViewModel,
+                    onSelectSymbol: { _ in })
         .preferredColorScheme(.light)
 }
 
-#Preview("Dark color scheme") {
-    SymbolsListView(onSelectSymbol: { _ in })
+#Preview("Light Color Scheme - Connected") {
+    SymbolsListView(viewModel: .previewConnectedViewModel,
+                    onSelectSymbol: { _ in })
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Color Scheme - Disconnected") {
+    SymbolsListView(viewModel: .previewDisconnectedViewModel,
+                    onSelectSymbol: { _ in })
         .preferredColorScheme(.dark)
 }
+
+#Preview("Dark Color Scheme - Connected") {
+    SymbolsListView(viewModel: .previewConnectedViewModel,
+                    onSelectSymbol: { _ in })
+        .preferredColorScheme(.dark)
+}
+

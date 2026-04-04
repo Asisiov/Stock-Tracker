@@ -52,7 +52,7 @@ struct SymbolBadgeStyle {
         case .negative:
             return .negative
         case .neutral:
-            return .neutral
+            return .textPrimary
         }
     }
     

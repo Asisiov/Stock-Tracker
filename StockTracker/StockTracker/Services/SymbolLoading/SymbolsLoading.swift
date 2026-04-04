@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SymbolsLoading {
-    func loadSymbols() async throws -> [StockSymbol]
+    func loadSymbols() throws -> [StockSymbol]
 }
 
 enum SymbolsJSONLoaderError: Error {
@@ -24,7 +24,7 @@ final class SymbolsJSONLoader: SymbolsLoading {
         self.fileName = fileName
     }
 
-    func loadSymbols() async throws -> [StockSymbol] {
+    func loadSymbols() throws -> [StockSymbol] {
         guard let url = bundle.url(forResource: fileName, withExtension: "json") else {
             throw SymbolsJSONLoaderError.fileNotFound
         }

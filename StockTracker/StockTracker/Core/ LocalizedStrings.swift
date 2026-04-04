@@ -29,4 +29,17 @@ enum LocalizedStrings {
     enum Details {
         static let about = LocalizedStringResource("details.about", defaultValue: "About")
     }
+    
+    enum Feed {
+        static var title = LocalizedStringResource("feed.title", defaultValue: "Live Price Feed")
+        static var feedRunning = LocalizedStringResource("feed.running", defaultValue: "Feed is running.")
+        static var feedNotRunning = LocalizedStringResource("feed.not_running", defaultValue: "Start the feed to see live prices.")
+        static var startFeed = LocalizedStringResource("feed.start", defaultValue: "Start Feed")
+        static var stopFeed = LocalizedStringResource("feed.stop", defaultValue: "Stop Feed")
+    }
+    
+    enum ConnectionStatus {
+        static var connected = LocalizedStringResource("connection.connected", defaultValue: "Connected")
+        static var disconnected = LocalizedStringResource("connection.disconnected", defaultValue: "Disconnected")
+    }
 }

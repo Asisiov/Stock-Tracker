@@ -19,7 +19,6 @@ struct SymbolDetailsView: View {
                 sectionSeparator
                 aboutSection
                 sectionSeparator
-                liveFeedSection
             }
             .padding(.horizontal, AppSpacing.xl)
             .padding(.top, AppSpacing.md)
@@ -85,39 +84,6 @@ struct SymbolDetailsView: View {
         }
     }
     
-    private var liveFeedSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            Text(viewModel.feedTitle)
-                .font(AppTypography.title)
-                .foregroundStyle(Color.textPrimary)
-            
-            Text(viewModel.feedDescriptionText)
-                .font(AppTypography.headline)
-                .foregroundStyle(Color.textSecondary)
-            
-            Button(action: viewModel.onFeedButtonTap) {
-                HStack(spacing: AppSpacing.sm) {
-                    if viewModel.isPerformingFeedAction {
-                        ProgressView()
-                            .tint(.white)
-                    } else {
-                        Image(systemName: viewModel.feedButtonIconName)
-                    }
-                    
-                    Text(viewModel.feedButtonTitle)
-                        .font(AppTypography.title)
-                }
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 56)
-                .background(viewModel.connectionStatus.inverseBackgroundColor)
-                .clipShape(Capsule())
-            }
-            .buttonStyle(.plain)
-            .disabled(viewModel.isPerformingFeedAction)
-        }
-    }
-    
     private var sectionSeparator: some View {
         Rectangle()
             .fill(Color.gray)
@@ -159,41 +125,4 @@ struct SymbolDetailsView: View {
         onBack: { }
     )
     .preferredColorScheme(.dark)
-}
-
-private struct PriceChangeChip: View {
-    let text: String
-    let tone: SymbolBadgeStyle.Tone
-    
-    var body: some View {
-        HStack(spacing: AppSpacing.sm) {
-            Image(systemName: tone.iconName)
-                .font(.system(size: 18, weight: .bold))
-                .foregroundStyle(tone.accentColor)
-            
-            Text(text)
-                .font(.system(size: 18, weight: .bold))
-                .foregroundStyle(tone.accentColor)
-        }
-    }
-}
-
-private struct ConnectionStatusChip: View {
-    let status: ConnectionStatus
-    
-    var body: some View {
-        HStack(spacing: AppSpacing.sm) {
-            Circle()
-                .fill(status.color)
-                .frame(width: 10, height: 10)
-            
-            Text(status.title)
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(status.foregroundColor)
-        }
-        .padding(.horizontal, AppSpacing.sm)
-        .padding(.vertical, AppSpacing.xs)
-        .background(status.backgroundColor)
-        .clipShape(Capsule())
-    }
 }

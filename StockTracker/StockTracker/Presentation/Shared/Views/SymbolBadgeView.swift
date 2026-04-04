@@ -22,18 +22,47 @@ struct SymbolBadgeView: View {
     }
 }
 
-#Preview("Badge Positive") {
-    SymbolBadgeView(text: "Apple", style: .badge(.positive))
+#Preview("Light Color Scheme - Badge") {
+    VStack(spacing: AppSpacing.sm) {
+        SymbolBadgeView(text: "Apple", style: .badge(.positive))
+            .preferredColorScheme(.light)
+        SymbolBadgeView(text: "Apple", style: .badge(.neutral))
+            .preferredColorScheme(.light)
+        SymbolBadgeView(text: "Apple", style: .badge(.negative))
+            .preferredColorScheme(.light)
+    }
 }
 
-#Preview("Badge Negative") {
-    SymbolBadgeView(text: "Apple", style: .badge(.negative))
+#Preview("Dark Color Scheme - Badge") {
+    VStack(spacing: AppSpacing.sm) {
+        SymbolBadgeView(text: "Apple", style: .badge(.positive))
+            .preferredColorScheme(.dark)
+        SymbolBadgeView(text: "Apple", style: .badge(.neutral))
+            .preferredColorScheme(.dark)
+        SymbolBadgeView(text: "Apple", style: .badge(.negative))
+            .preferredColorScheme(.dark)
+    }
+    .preferredColorScheme(.dark)
 }
 
-#Preview("Price Change Positive") {
-    SymbolBadgeView(text: "+2.65", style: .priceChange(.positive))
+#Preview("Light Color Scheme - Price Change") {
+    VStack(spacing: AppSpacing.sm) {
+        SymbolBadgeView(text: "+2.65", style: .priceChange(.positive))
+            .preferredColorScheme(.light)
+        SymbolBadgeView(text: "+0.00", style: .priceChange(.neutral))
+            .preferredColorScheme(.light)
+        SymbolBadgeView(text: "+2.65", style: .priceChange(.negative))
+            .preferredColorScheme(.light)
+    }
 }
 
-#Preview("Price Change Negative") {
-    SymbolBadgeView(text: "+2.65", style: .priceChange(.negative))
+#Preview("Dark Color Scheme - Price Change") {
+    VStack(spacing: AppSpacing.sm) {
+        SymbolBadgeView(text: "+2.65", style: .priceChange(.positive))
+            .preferredColorScheme(.dark)
+        SymbolBadgeView(text: "+0.00", style: .priceChange(.neutral))
+            .preferredColorScheme(.dark)
+        SymbolBadgeView(text: "+2.65", style: .priceChange(.negative))
+            .preferredColorScheme(.dark)
+    }
 }

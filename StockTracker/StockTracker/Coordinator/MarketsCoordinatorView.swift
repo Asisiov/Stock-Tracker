@@ -16,9 +16,9 @@ struct MarketsCoordinatorView: View {
 
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            SymbolsListView {
-                coordinator.showDetails(for: $0)
-            }
+            MarketsFeatureAssembly.makeSymbolsListView(onSelectSymbol: { symbolId in
+                coordinator.showDetails(for: symbolId)
+            })
             .navigationDestination(for: MarketsRoute.self) { route in
                 coordinator.destination(for: route)
             }

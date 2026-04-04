@@ -23,9 +23,9 @@ enum ConnectionStatus: String, Codable, Equatable {
     var title: String {
         switch self {
         case .connected:
-            return "Connected"
+            return String(localized: LocalizedStrings.ConnectionStatus.connected)
         case .disconnected:
-            return "Disconnected"
+            return String(localized: LocalizedStrings.ConnectionStatus.disconnected)
         }
     }
     
@@ -54,5 +54,34 @@ enum ConnectionStatus: String, Codable, Equatable {
         case .disconnected:
             return .darkGreen
         }
+    }
+}
+
+// MARK: - ConnectionStatus + Feed
+
+extension ConnectionStatus {
+    
+    private var isFeedRunning: Bool {
+        self == .connected
+    }
+    
+    var feedTitle: String {
+        String(localized: LocalizedStrings.Feed.title)
+    }
+    
+    var feedDescriptionText: String {
+        isFeedRunning
+        ? String(localized: LocalizedStrings.Feed.feedRunning)
+        : String(localized: LocalizedStrings.Feed.feedNotRunning)
+    }
+    
+    var feedButtonTitle: String {
+        isFeedRunning
+        ? String(localized: LocalizedStrings.Feed.stopFeed)
+        : String(localized: LocalizedStrings.Feed.startFeed)
+    }
+    
+    var feedButtonIconName: String {
+        isFeedRunning ? "stop.fill" : "play.fill"
     }
 }
