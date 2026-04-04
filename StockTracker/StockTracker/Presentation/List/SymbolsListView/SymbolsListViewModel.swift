@@ -150,7 +150,6 @@ private extension SymbolsListViewModel {
         state = .content(items)
     }
 
-    // TODO: Refactoring to adapter
     func sort(_ symbols: [StockSymbol], by option: SymbolSortOption) -> [StockSymbol] {
         symbols.sorted { option.comparator(lhs: $0, rhs: $1) }
     }

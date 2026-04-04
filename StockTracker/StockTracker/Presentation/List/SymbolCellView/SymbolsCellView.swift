@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SymbolsCellView: View {
     
-    @State var viewModel: SymbolCellViewModel
+    let item: SymbolRowItem
     
     var body: some View {
         HStack {            
@@ -22,8 +22,8 @@ struct SymbolsCellView: View {
     
     var leftView: some View {
         VStack(alignment: .leading) {
-            SymbolBadgeView(text: viewModel.title, style: .badge(viewModel.tone))
-            Text(viewModel.subtitle)
+            SymbolBadgeView(text: item.title, style: .badge(item.tone))
+            Text(item.subtitle)
                 .font(AppTypography.body)
                 .foregroundStyle(Color.textSecondary)
         }
@@ -31,34 +31,34 @@ struct SymbolsCellView: View {
     
     var rightView: some View {
         VStack(alignment: .trailing) {
-            Text(viewModel.price)
+            Text(item.price)
                 .font(AppTypography.title)
                 .foregroundStyle(Color.primary)
-            SymbolBadgeView(text: viewModel.priceDelta, style: .priceChange(viewModel.tone))
+            SymbolBadgeView(text: item.priceDelta, style: .priceChange(item.tone))
         }
     }
 }
 
 #Preview("Light Positive") {
-    SymbolsCellView(viewModel: .previewPositive)
+    SymbolsCellView(item: .previewPositive)
     .padding()
     .preferredColorScheme(.light)
 }
 
 #Preview("Light Negative") {
-    SymbolsCellView(viewModel: .previewNegative)
+    SymbolsCellView(item: .previewNegative)
     .padding()
     .preferredColorScheme(.light)
 }
 
 #Preview("Dark Positive") {
-    SymbolsCellView(viewModel: .previewPositive)
+    SymbolsCellView(item: .previewPositive)
     .padding()
     .preferredColorScheme(.dark)
 }
 
 #Preview("Dark Negative") {
-    SymbolsCellView(viewModel: .previewNegative)
+    SymbolsCellView(item: .previewNegative)
     .padding()
     .preferredColorScheme(.dark)
 }

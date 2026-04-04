@@ -112,15 +112,7 @@ struct SymbolsListView: View {
                     Button {
                         onSelectSymbol(item.id)
                     } label: {
-                        SymbolsCellView(
-                            viewModel: SymbolCellViewModel(
-                                title: item.title,
-                                subtitle: item.subtitle,
-                                price: item.price,
-                                priceDelta: item.priceDelta,
-                                tone: item.tone
-                            )
-                        )
+                        SymbolsCellView(item: item)
                     }
                     .buttonStyle(.plain)
                 }

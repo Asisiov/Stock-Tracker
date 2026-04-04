@@ -25,6 +25,7 @@ actor URLSessionWebSocketClient: WebSocketClient {
     func connect() async throws {
         guard task == nil else { return }
 
+        print("--- connect to \(url)")
         let task = session.webSocketTask(with: url)
         self.task = task
         task.resume()
@@ -35,6 +36,7 @@ actor URLSessionWebSocketClient: WebSocketClient {
             throw WebSocketClientError.notConnected
         }
 
+        print("--- send message: \(text)")
         try await task.send(.string(text))
     }
 
@@ -47,12 +49,15 @@ actor URLSessionWebSocketClient: WebSocketClient {
 
         switch message {
         case .string(let text):
+            print("--- receive message: \(text)")
             return text
 
         case .data(let data):
             guard let text = String(data: data, encoding: .utf8) else {
                 throw WebSocketClientError.invalidTextPayload
             }
+            
+            print("--- receive package: \(text)")
             return text
 
         @unknown default:
@@ -61,6 +66,7 @@ actor URLSessionWebSocketClient: WebSocketClient {
     }
 
     func disconnect() async {
+        print("--- disconnect from \(url)")
         task?.cancel(with: .normalClosure, reason: nil)
         task = nil
     }

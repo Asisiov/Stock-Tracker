@@ -31,7 +31,7 @@ actor EchoPriceFeedService: PriceFeedService {
         webSocketClient: any WebSocketClient,
         updateInterval: TimeInterval = 1.0,
         randomDeltaProvider: @escaping @Sendable () -> Decimal = {
-            Decimal(Double.random(in: -1.50 ... 1.50))
+            Decimal(Double.random(in: -3.50 ... 2.50))
         }
     ) {
         self.webSocketClient = webSocketClient
