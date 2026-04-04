@@ -53,19 +53,8 @@ final class PriceFormatter: PriceFormatting {
 /// -3.2 → -3.20
 /// 0 → 0.00
 final class PriceChangeFormatter: PriceChangeFormatting {
-    private let factory: NumberFormatterFactoryProtocol
+    private let formatter: NumberFormatter
     private let scale: Int
-    private let locale: Locale
-    
-    private lazy var signedFormatter: NumberFormatter = {
-        let formatter = makeFormatter()
-        formatter.positivePrefix = "+"
-        return formatter
-    }()
-    
-    private lazy var zeroFormatter: NumberFormatter = {
-        makeFormatter()
-    }()
 
     init(
         locale: Locale,
@@ -73,27 +62,37 @@ final class PriceChangeFormatter: PriceChangeFormatting {
         factory: NumberFormatterFactoryProtocol = NumberFormatterFactory()
     ) {
         self.scale = scale
-        self.factory = factory
-        self.locale = locale
-    }
-
-    func string(from value: Decimal, currencyCode: String) -> String {
-        let roundedValue = value.rounded(scale: scale)
-        let normalizedValue: Decimal = roundedValue == 0 ? 0 : roundedValue
-
-        let formatter = normalizedValue == 0 ? zeroFormatter : signedFormatter
-        formatter.currencyCode = currencyCode
-        return formatter.string(from: normalizedValue as NSDecimalNumber) ?? "—"
-    }
-    
-    private func makeFormatter() -> NumberFormatter {
-        factory.makeDecimalFormatter(
+        self.formatter = factory.makeDecimalFormatter(
             locale: locale,
             minimumFractionDigits: scale,
             maximumFractionDigits: scale,
             usesGroupingSeparator: true
         )
     }
+
+    func string(from value: Decimal, currencyCode: String) -> String {
+        let roundedValue = value.rounded(scale: scale)
+        let normalizedValue: Decimal = roundedValue == 0 ? 0 : roundedValue
+        formatter.currencyCode = currencyCode
+        guard let formatted = formatter.string(from: value as NSDecimalNumber) else {
+            return "—"
+        }
+        
+        if value > 0 {
+            return "+" + formatted
+        } else {
+            return formatted
+        }
+    }
+    
+//    private func makeFormatter() -> NumberFormatter {
+//        factory.makeDecimalFormatter(
+//            locale: locale,
+//            minimumFractionDigits: scale,
+//            maximumFractionDigits: scale,
+//            usesGroupingSeparator: true
+//        )
+//    }
 }
 
 /// Formats any standard numbers that are neither the current price nor the price change.

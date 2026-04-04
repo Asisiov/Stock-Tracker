@@ -11,18 +11,17 @@ enum SymbolSortOption: String, CaseIterable, Codable {
     case price
     case priceChange
     
-    // TODO: Localisation
     var title: String {
         switch self {
-        case .price: return "Price"
-        case .priceChange: return "% Change"
+        case .price: return String(localized: LocalizedStrings.SortOption.price)
+        case .priceChange: return String(localized: LocalizedStrings.SortOption.change)
         }
     }
     
     var iconName: String {
         switch self {
-        case .price: return "chart.line.uptrend.xyaxis"
-        case .priceChange: return "arrow.up.arrow.down"
+        case .price: return AppIcon.chartLineUpTrendX
+        case .priceChange: return AppIcon.sort
         }
     }
 }

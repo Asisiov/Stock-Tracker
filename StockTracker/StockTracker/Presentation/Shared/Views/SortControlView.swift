@@ -11,13 +11,12 @@ struct SortControlView: View {
     @Binding var selected: SymbolSortOption
     
     var body: some View {
-        HStack(spacing: 12) {
-            // TODO: Localisation
-            Text("Sort by")
+        HStack(spacing: AppSpacing.sm) {
+            Text(LocalizedStrings.SortOption.sortBy)
                 .font(.headline)
                 .foregroundStyle(.secondary)
             
-            HStack(spacing: 6) {
+            HStack(spacing: AppSpacing.xxs) {
                 ForEach(SymbolSortOption.allCases, id: \.self) { option in
                     Button {
                         withAnimation(.easeInOut(duration: 0.18)) {
@@ -32,12 +31,13 @@ struct SortControlView: View {
                                 .font(.headline)
                         }
                         .foregroundStyle(selected == option ? .primary : .secondary)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
+                        .padding(.horizontal, AppSpacing.md)
+                        .padding(.vertical, AppSpacing.sm)
                         .frame(minHeight: 44)
                         .background {
                             if selected == option {
-                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                RoundedRectangle(cornerRadius: AppRadius.lg,
+                                                 style: .continuous)
                                     .fill(Color.white.opacity(0.08))
                             }
                         }

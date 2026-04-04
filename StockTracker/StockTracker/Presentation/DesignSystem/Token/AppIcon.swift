@@ -17,4 +17,5 @@ enum AppIcon {
     static let play = "play.fill"
     static let stop = "stop.fill"
     static let chevronRight = "chevron.right"
+    static let chartLineUpTrendX = "chart.line.uptrend.xyaxis"
 }

@@ -17,8 +17,8 @@ struct FormattersTests {
     @Test(
         "PriceFormatter formats price for supported locales",
         arguments: [
-            ("en_US", "1234.56", "1,234.56"),
-            ("uk_UA", "1234.56", "1 234,56")
+            ("en_US", "1234.56", "$1,234.56"),
+            ("uk_UA", "1234.56", "1 234,56 USD")
         ]
     )
     func priceFormatter_formatsPrice(
@@ -29,7 +29,7 @@ struct FormattersTests {
         let sut = PriceFormatter(locale: Locale(identifier: localeIdentifier))
 
         let value = try #require(Decimal(string: input))
-        let result = sut.string(from: value)
+        let result = sut.string(from: value, currencyCode: "USD")
 
         #expect(normalizeSpaces(result) == expected)
     }
@@ -41,9 +41,9 @@ struct FormattersTests {
         let sut = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
 
         let value = try #require(Decimal(string: "12.3"))
-        let result = sut.string(from: value)
+        let result = sut.string(from: value, currencyCode: "USD")
 
-        #expect(result == "+12.30")
+        #expect(result == "+$12.30")
     }
 
     @Test("PriceChangeFormatter keeps minus sign for negative values")
@@ -51,18 +51,18 @@ struct FormattersTests {
         let sut = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
 
         let value = try #require(Decimal(string: "-12.3"))
-        let result = sut.string(from: value)
+        let result = sut.string(from: value, currencyCode: "USD")
 
-        #expect(result == "-12.30")
+        #expect(result == "-$12.30")
     }
 
     @Test("PriceChangeFormatter formats zero without plus sign")
     func priceChangeFormatter_zeroValue_formatsWithoutPlusSign() {
         let sut = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
 
-        let result = sut.string(from: 0)
+        let result = sut.string(from: 0, currencyCode: "USD")
 
-        #expect(result == "0.00")
+        #expect(result == "$0.00")
     }
 
     @Test("PriceChangeFormatter normalizes negative zero to zero")
@@ -70,9 +70,9 @@ struct FormattersTests {
         let sut = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
 
         let value = try #require(Decimal(string: "-0.004"))
-        let result = sut.string(from: value)
+        let result = sut.string(from: value, currencyCode: "USD")
 
-        #expect(result == "0.00")
+        #expect(result == "$0.00")
     }
 
     // MARK: - Generic Number Formatter -
@@ -89,7 +89,7 @@ struct FormattersTests {
             usesGroupingSeparator: true
         )
 
-        #expect(result == "1,234.568")
+        #expect(result == "$1,234.568")
     }
 
     @Test("GenericNumberFormatter can disable grouping separator")
@@ -104,7 +104,7 @@ struct FormattersTests {
             usesGroupingSeparator: false
         )
 
-        #expect(result == "1234.56")
+        #expect(result == "$1234.56")
     }
 
     // MARK: - Helpers -

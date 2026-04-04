@@ -15,25 +15,23 @@ struct SymbolsListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    // TODO: Localisation
-                    Text("Custom Text")
-                        .font(AppTypography.largeTitle)                    
+                HStack {                    
+                    Text(LocalizedStrings.Markets.title)
+                        .font(AppTypography.largeTitle)
                     Spacer()
                     ConnectionIndicatorView(status: $status, size: 10)
                 }
                 .padding()
                 
+                SortControlView(selected: $viewModel.sortOption)
+                
                 ScrollView {
-                    VStack {
-                        SortControlView(selected: $viewModel.sortOption)
-                        LazyVStack(spacing: AppSpacing.sm) {
-                            ForEach(viewModel.cellViewModels) { item in
-                                RoundedRectangle(cornerRadius: 1)
-                                    .foregroundColor( Color.backgroundSecondary)
-                                    .frame(height: 2)
-                                SymbolsCellView(viewModel: item)
-                            }
+                    LazyVStack(spacing: AppSpacing.sm) {
+                        ForEach(viewModel.cellViewModels) { item in
+                            RoundedRectangle(cornerRadius: 1)
+                                .foregroundColor( Color.backgroundSecondary)
+                                .frame(height: 2)
+                            SymbolsCellView(viewModel: item)
                         }
                     }
                     .padding()
