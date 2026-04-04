@@ -25,4 +25,8 @@ enum LocalizedStrings {
         static let change = LocalizedStringResource("sort.change", defaultValue: "% Change")
         static let sortBy = LocalizedStringResource("sort.sort_by", defaultValue: "Sort by:")
     }
+    
+    enum Details {
+        static let about = LocalizedStringResource("details.about", defaultValue: "About")
+    }
 }

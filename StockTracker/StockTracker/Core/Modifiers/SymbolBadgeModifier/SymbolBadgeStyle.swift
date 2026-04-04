@@ -13,6 +13,28 @@ struct SymbolBadgeStyle {
         case positive
         case negative
         case neutral
+        
+        var accentColor: Color {
+            switch self {
+            case .positive:
+                return .positive
+            case .negative:
+                return .negative
+            case .neutral:
+                return .neutral
+            }
+        }
+        
+        var iconName: String {
+            switch self {
+            case .positive:
+                return "arrow.up"
+            case .negative:
+                return "arrow.down"
+            case .neutral:
+                return "minus"
+            }
+        }
     }
     
     enum Size {

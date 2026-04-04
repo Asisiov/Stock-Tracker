@@ -19,4 +19,40 @@ enum ConnectionStatus: String, Codable, Equatable {
             return .negative
         }
     }
+    
+    var title: String {
+        switch self {
+        case .connected:
+            return "Connected"
+        case .disconnected:
+            return "Disconnected"
+        }
+    }
+    
+    var foregroundColor: Color {
+        switch self {
+        case .connected:
+            return .positive
+        case .disconnected:
+            return .negative
+        }
+    }
+    
+    var backgroundColor: Color {
+        switch self {
+        case .connected:
+            return .darkGreen
+        case .disconnected:
+            return .darkNegative
+        }
+    }
+    
+    var inverseBackgroundColor: Color {
+        switch self {
+        case .connected:
+            return .darkNegative
+        case .disconnected:
+            return .darkGreen
+        }
+    }
 }
