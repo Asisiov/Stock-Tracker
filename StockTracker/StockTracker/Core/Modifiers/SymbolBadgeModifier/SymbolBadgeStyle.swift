@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SymbolBadgeStyle {
     
-    enum Tone {
+    enum Tone: Equatable {
         case positive
         case negative
         case neutral

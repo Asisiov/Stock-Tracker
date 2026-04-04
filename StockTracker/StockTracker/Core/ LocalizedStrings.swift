@@ -14,6 +14,10 @@ enum LocalizedStrings {
     
     enum Markets {
         static let title = LocalizedStringResource("markets.title", defaultValue: "Markets")
+        static let loadingSymbols = LocalizedStringResource("markets.loading_symbols", defaultValue: "Loading symbols...")
+        static let noSymbolsAvailable = LocalizedStringResource("markets.no_symbols_available", defaultValue: "No symbols available")
+        static let tryAgaine = LocalizedStringResource("markets.try_again", defaultValue: "Try again")
+        static let failedToLoad = LocalizedStringResource("markets.failed_to_load", defaultValue: "Failed to load symbols")
     }
     
     enum SortOption {
