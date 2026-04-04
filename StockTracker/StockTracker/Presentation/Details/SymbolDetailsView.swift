@@ -15,7 +15,6 @@ struct SymbolDetailsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: AppSpacing.xl) {
-                header
                 mainSection
                 sectionSeparator
                 aboutSection
@@ -25,6 +24,13 @@ struct SymbolDetailsView: View {
             .padding(.horizontal, AppSpacing.xl)
             .padding(.top, AppSpacing.md)
             .padding(.bottom, AppSpacing.xxl)
+        }
+        .navigationTitle(LocalizedStrings.Markets.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ConnectionStatusChip(status: viewModel.connectionStatus)
+            }
         }
     }
     

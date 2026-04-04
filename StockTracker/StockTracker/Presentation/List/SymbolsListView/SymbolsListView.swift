@@ -11,21 +11,20 @@ struct SymbolsListView: View {
     
     @State private var viewModel: SymbolsListViewModel = .build()
     @State private var status: ConnectionStatus = .disconnected
+    let onSelectSymbol: (String) -> Void
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                headerView
-                    .padding(.horizontal)
-                
-                SortControlView(selected: $viewModel.sortOption)                
-                contentView
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .task {
-                guard case .idle = viewModel.state else { return }
-                await viewModel.loadStocks()
-            }
+        VStack {
+            headerView
+                .padding(.horizontal)
+            
+            SortControlView(selected: $viewModel.sortOption)
+            contentView
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .task {
+            guard case .idle = viewModel.state else { return }
+            await viewModel.loadStocks()
         }
     }
     
@@ -104,7 +103,12 @@ struct SymbolsListView: View {
                         .foregroundStyle(Color.backgroundSecondary)
                         .frame(height: 2)
                     
-                    SymbolsCellView(viewModel: item)
+                    Button {
+                        onSelectSymbol(item.id)
+                    } label: {
+                        SymbolsCellView(viewModel: item)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .padding()
@@ -113,11 +117,11 @@ struct SymbolsListView: View {
 }
 
 #Preview("Light color scheme") {
-    SymbolsListView()
+    SymbolsListView(onSelectSymbol: { _ in })
         .preferredColorScheme(.light)
 }
 
 #Preview("Dark color scheme") {
-    SymbolsListView()
+    SymbolsListView(onSelectSymbol: { _ in })
         .preferredColorScheme(.dark)
 }
