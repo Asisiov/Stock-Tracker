@@ -78,21 +78,16 @@ final class PriceChangeFormatter: PriceChangeFormatting {
             return "—"
         }
         
-        if value > 0 {
+        if normalizedValue > 0 {
             return "+" + formatted
+        } else if normalizedValue == 0 {
+            return formatted
+                .replacingOccurrences(of: "-", with: "")
+                .replacingOccurrences(of: "+", with: "")
         } else {
             return formatted
         }
     }
-    
-//    private func makeFormatter() -> NumberFormatter {
-//        factory.makeDecimalFormatter(
-//            locale: locale,
-//            minimumFractionDigits: scale,
-//            maximumFractionDigits: scale,
-//            usesGroupingSeparator: true
-//        )
-//    }
 }
 
 /// Formats any standard numbers that are neither the current price nor the price change.

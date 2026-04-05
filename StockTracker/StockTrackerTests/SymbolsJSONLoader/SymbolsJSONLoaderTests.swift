@@ -13,13 +13,13 @@ import Testing
 struct SymbolsJSONLoaderTests {
 
     @Test("Loads symbols from JSON fixture")
-    func loadsSymbolsFromJSONFixture() async throws {
+    func loadsSymbolsFromJSONFixture() throws {
         let sut = SymbolsJSONLoader(
             bundle: testBundle,
             fileName: "mock_symbols_fixture"
         )
 
-        let symbols = try await sut.loadSymbols()
+        let symbols = try sut.loadSymbols()
         
         let expectedPreviousPrice = try #require(Decimal(string: "189.32"))
         let expectedCurrentPrice = try #require(Decimal(string: "190.11"))
@@ -43,8 +43,8 @@ struct SymbolsJSONLoaderTests {
             fileName: "missing_file"
         )
 
-        await #expect(throws: SymbolsJSONLoaderError.fileNotFound) {
-            try await sut.loadSymbols()
+        #expect(throws: SymbolsJSONLoaderError.fileNotFound) {
+            try sut.loadSymbols()
         }
     }
 

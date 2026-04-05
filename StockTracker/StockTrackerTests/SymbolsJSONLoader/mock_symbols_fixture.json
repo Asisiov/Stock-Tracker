@@ -4,6 +4,7 @@
     "name": "Apple Inc.",
     "previousPrice": 189.32,
     "currentPrice": 190.11,
+    "currencyCode": "USD",
     "details": "Consumer technology company known for iPhone, Mac, iPad, services and wearables."
   },
   {
@@ -11,6 +12,7 @@
     "name": "Microsoft Corporation",
     "previousPrice": 417.85,
     "currentPrice": 416.90,
+    "currencyCode": "USD",
     "details": "Global software and cloud company behind Windows, Microsoft 365, Azure and enterprise platforms."
   }
 ]
