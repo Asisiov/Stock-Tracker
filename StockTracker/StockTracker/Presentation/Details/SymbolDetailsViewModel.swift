@@ -18,8 +18,6 @@ final class SymbolDetailsViewModel {
     var priceText: String
     var changeText: String
     var tone: SymbolBadgeStyle.Tone
-    var isFeedRunning: Bool
-    var isPerformingFeedAction = false
     var connectionStatus: ConnectionStatus
     
     init(
@@ -30,7 +28,6 @@ final class SymbolDetailsViewModel {
         changeText: String,
         tone: SymbolBadgeStyle.Tone,
         aboutText: String,
-        isFeedRunning: Bool = false,
         connectionStatus: ConnectionStatus
     ) {
         self.symbolID = symbolID
@@ -40,7 +37,6 @@ final class SymbolDetailsViewModel {
         self.changeText = changeText
         self.tone = tone
         self.aboutText = aboutText
-        self.isFeedRunning = isFeedRunning
         self.connectionStatus = connectionStatus
     }
 }

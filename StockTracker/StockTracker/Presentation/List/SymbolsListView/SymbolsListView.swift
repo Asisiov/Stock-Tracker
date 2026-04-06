@@ -113,6 +113,8 @@ struct SymbolsListView: View {
                         onSelectSymbol(item.id)
                     } label: {
                         SymbolsCellView(item: item)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
                 }

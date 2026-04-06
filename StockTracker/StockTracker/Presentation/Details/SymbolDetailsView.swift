@@ -101,7 +101,6 @@ struct SymbolDetailsView: View {
             changeText: "+0.84",
             tone: .positive,
             aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
-            isFeedRunning: false,
             connectionStatus: .disconnected,
         ),
         onBack: { }
@@ -119,7 +118,6 @@ struct SymbolDetailsView: View {
             changeText: "+0.84",
             tone: .positive,
             aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
-            isFeedRunning: false,
             connectionStatus: .disconnected,
         ),
         onBack: { }
