@@ -47,15 +47,12 @@ final class SymbolsListViewModel {
     private var togleFeedTask: Task<Void, Never>?
     
     private let repository: SymbolsRepositoryProtocol
-    private let priceFormatter: PriceFormatting
-    private let priceChangeFormatter: PriceChangeFormatting
+    private let presentationMapper: SymbolPresentationMapping
     
     init(repository: SymbolsRepositoryProtocol,
-         priceFormatter: PriceFormatting,
-         priceChangeFormatter: PriceChangeFormatting) {
+         presentationMapper: SymbolPresentationMapping) {
         self.repository = repository
-        self.priceFormatter = priceFormatter
-        self.priceChangeFormatter = priceChangeFormatter
+        self.presentationMapper = presentationMapper
     }
     
     isolated deinit {
@@ -146,7 +143,10 @@ private extension SymbolsListViewModel {
             return
         }
 
-        let items = sort(symbols, by: sortOption).map(makeRowItem(from:))
+        let items = sort(symbols, by: sortOption).map { symbol in
+            let snapshot = presentationMapper.makeSnapshot(from: symbol)
+            return makeRowItem(from: snapshot)
+        }
         state = .content(items)
     }
 
@@ -154,25 +154,15 @@ private extension SymbolsListViewModel {
         symbols.sorted { option.comparator(lhs: $0, rhs: $1) }
     }
 
-    func makeRowItem(from symbol: StockSymbol) -> SymbolRowItem {
+    func makeRowItem(from snapshot: SymbolPresentationSnapshot) -> SymbolRowItem {
         SymbolRowItem(
-            id: symbol.id,
-            title: symbol.ticker,
-            subtitle: symbol.name,
-            price: priceFormatter.string(from: symbol.currentPrice, currencyCode: symbol.currencyCode),
-            priceDelta: priceChangeFormatter.string(from: symbol.delta, currencyCode: symbol.currencyCode),
-            tone: tone(for: symbol.delta)
+            id: snapshot.symbolID,
+            title: snapshot.ticker,
+            subtitle: snapshot.companyName,
+            price: snapshot.priceText,
+            priceDelta: snapshot.changeText,
+            tone: snapshot.tone
         )
-    }
-
-    func tone(for value: Decimal) -> SymbolBadgeStyle.Tone {
-        if value > 0 {
-            return .positive
-        } else if value < 0 {
-            return .negative
-        } else {
-            return .neutral
-        }
     }
     
     func mapFeedSate(_ state: FeedConnectionState) -> ConnectionStatus {

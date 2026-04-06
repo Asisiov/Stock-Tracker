@@ -19,10 +19,17 @@ enum SymbolsListPreviewFactory {
             connectionState: connectionState
         )
 
+        let priceFormatter = PriceFormatter(locale: Locale(identifier: "en_US"))
+        let priceChangeFormatter = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
+
+        let presentationMapper = SymbolPresentationMapper(
+            priceFormatter: priceFormatter,
+            priceChangeFormatter: priceChangeFormatter
+        )
+
         return SymbolsListViewModel(
             repository: repository,
-            priceFormatter: PriceFormatter(locale: Locale(identifier: "en_US")),
-            priceChangeFormatter: PriceChangeFormatter(locale: Locale(identifier: "en_US"))
+            presentationMapper: presentationMapper
         )
     }
 }

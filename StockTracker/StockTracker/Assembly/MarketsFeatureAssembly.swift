@@ -37,10 +37,14 @@ enum MarketsFeatureAssembly {
         let priceFormatter = PriceFormatter(locale: Locale(identifier: "en_US"))
         let priceChangeFormatter = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
 
-        let viewModel = SymbolsListViewModel(
-            repository: repository,
+        let presentationMapper = SymbolPresentationMapper(
             priceFormatter: priceFormatter,
             priceChangeFormatter: priceChangeFormatter
+        )
+
+        let viewModel = SymbolsListViewModel(
+            repository: repository,
+            presentationMapper: presentationMapper
         )
 
         return SymbolsListView(viewModel: viewModel, onSelectSymbol: onSelectSymbol)
