@@ -91,36 +91,36 @@ struct SymbolDetailsView: View {
     }
 }
 
-#Preview("Light Color Scheme") {
-    SymbolDetailsView(
-        viewModel: SymbolDetailsViewModel(
-            symbolID: "brk-b",
-            ticker: "BRK.B",
-            companyName: "Berkshire Hathaway",
-            priceText: "$432.19",
-            changeText: "+0.84",
-            tone: .positive,
-            aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
-            connectionStatus: .disconnected,
-        ),
-        onBack: { }
-    )
-    .preferredColorScheme(.light)
-}
-
-#Preview("Dark Color Scheme") {
-    SymbolDetailsView(
-        viewModel: SymbolDetailsViewModel(
-            symbolID: "brk-b",
-            ticker: "BRK.B",
-            companyName: "Berkshire Hathaway",
-            priceText: "$432.19",
-            changeText: "+0.84",
-            tone: .positive,
-            aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
-            connectionStatus: .disconnected,
-        ),
-        onBack: { }
-    )
-    .preferredColorScheme(.dark)
-}
+//#Preview("Light Color Scheme") {
+//    SymbolDetailsView(
+//        viewModel: SymbolDetailsViewModel(
+//            symbolID: "brk-b",
+//            ticker: "BRK.B",
+//            companyName: "Berkshire Hathaway",
+//            priceText: "$432.19",
+//            changeText: "+0.84",
+//            tone: .positive,
+//            aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
+//            connectionStatus: .disconnected,
+//        ),
+//        onBack: { }
+//    )
+//    .preferredColorScheme(.light)
+//}
+//
+//#Preview("Dark Color Scheme") {
+//    SymbolDetailsView(
+//        viewModel: SymbolDetailsViewModel(
+//            symbolID: "brk-b",
+//            ticker: "BRK.B",
+//            companyName: "Berkshire Hathaway",
+//            priceText: "$432.19",
+//            changeText: "+0.84",
+//            tone: .positive,
+//            aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
+//            connectionStatus: .disconnected,
+//        ),
+//        onBack: { }
+//    )
+//    .preferredColorScheme(.dark)
+//}

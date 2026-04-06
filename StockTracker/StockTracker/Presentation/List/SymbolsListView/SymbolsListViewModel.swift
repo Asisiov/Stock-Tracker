@@ -39,12 +39,19 @@ final class SymbolsListViewModel {
         }
     }
     
+    private(set) var detailsViewModel: SymbolDetailsViewModel?
+    private(set) var selectedSymbolID: String?
+    
+    var isShowingDetails: Bool {
+        detailsViewModel != nil
+    }
+    
     private var symbols: [StockSymbol] = []
     private var hasStarted = false
     
     private var symbolsTask: Task<Void, Never>?
     private var connectionTask: Task<Void, Never>?
-    private var togleFeedTask: Task<Void, Never>?
+    private var toggleFeedTask: Task<Void, Never>?
     
     private let repository: SymbolsRepositoryProtocol
     private let presentationMapper: SymbolPresentationMapping
@@ -58,7 +65,7 @@ final class SymbolsListViewModel {
     isolated deinit {
         symbolsTask?.cancel()
         connectionTask?.cancel()
-        togleFeedTask?.cancel()
+        toggleFeedTask?.cancel()
     }
     
     func onTask() {
@@ -102,11 +109,36 @@ final class SymbolsListViewModel {
     }
     
     func onFeedButtonTap() {
-        togleFeedTask?.cancel()
-        togleFeedTask = Task {
+        toggleFeedTask?.cancel()
+        toggleFeedTask = Task {
             guard !Task.isCancelled else { return }
             await toggleFeed()
         }
+    }
+    
+    func selectSymbol(id: String) {
+//        guard selectedSymbolID != id else { return }
+        guard let symbol = symbols.first(where: { $0.id == id }) else { return }
+        selectedSymbolID = id
+        
+        let snapshot = presentationMapper.makeSnapshot(from: symbol)        
+        if let detailsViewModel,
+           detailsViewModel.symbolID == id {
+            detailsViewModel.update(
+                with: snapshot,
+                connectionStatus: connectionStatus
+            )
+        } else {
+            detailsViewModel = SymbolDetailsViewModel(
+                snapshot: snapshot,
+                connectionStatus: connectionStatus
+            )
+        }
+    }
+    
+    func clearSelection() {
+        selectedSymbolID = nil
+        detailsViewModel = nil
     }
 }
 
@@ -117,23 +149,27 @@ private extension SymbolsListViewModel {
         let initial = await repository.currentSymbols()
         symbols = initial
         rebuildState()
+        syncSelectedDetails()
 
         let stream = await repository.observeSymbols()
         for await symbols in stream {
             guard Task.isCancelled == false else { return }
             self.symbols = symbols
             rebuildState()
+            syncSelectedDetails()
         }
     }
 
     func observeConnectionStatus() async {
         let state = await repository.currentConnectionState()
         connectionStatus = mapFeedSate(state)
+        detailsViewModel?.updateConnectionStatus(connectionStatus)
 
         let stream = await repository.observeConnectionState()
         for await state in stream {
             guard Task.isCancelled == false else { return }
             connectionStatus = mapFeedSate(state)
+            detailsViewModel?.updateConnectionStatus(connectionStatus)
         }
     }
 
@@ -167,5 +203,31 @@ private extension SymbolsListViewModel {
     
     func mapFeedSate(_ state: FeedConnectionState) -> ConnectionStatus {
         state == .connected ? .connected : .disconnected
+    }
+    
+    func syncSelectedDetails() {
+        guard let selectedSymbolID else {
+            detailsViewModel = nil
+            return
+        }
+        
+        guard let symbol = symbols.first(where: { $0.id == selectedSymbolID }) else {
+            clearSelection()
+            return
+        }
+        
+        let snapshot = presentationMapper.makeSnapshot(from: symbol)
+        
+        if let detailsViewModel {
+            detailsViewModel.update(
+                with: snapshot,
+                connectionStatus: connectionStatus
+            )
+        } else {
+            detailsViewModel = SymbolDetailsViewModel(
+                snapshot: snapshot,
+                connectionStatus: connectionStatus
+            )
+        }
     }
 }

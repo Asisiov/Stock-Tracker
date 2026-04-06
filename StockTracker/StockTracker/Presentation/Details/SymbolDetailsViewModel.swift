@@ -21,22 +21,35 @@ final class SymbolDetailsViewModel {
     var connectionStatus: ConnectionStatus
     
     init(
-        symbolID: String,
-        ticker: String,
-        companyName: String,
-        priceText: String,
-        changeText: String,
-        tone: SymbolBadgeStyle.Tone,
-        aboutText: String,
+        snapshot: SymbolPresentationSnapshot,
         connectionStatus: ConnectionStatus
     ) {
-        self.symbolID = symbolID
-        self.ticker = ticker
-        self.companyName = companyName
-        self.priceText = priceText
-        self.changeText = changeText
-        self.tone = tone
-        self.aboutText = aboutText
+        self.symbolID = snapshot.symbolID
+        self.ticker = snapshot.ticker
+        self.companyName = snapshot.companyName
+        self.aboutText = snapshot.aboutText
+        self.priceText = snapshot.priceText
+        self.changeText = snapshot.changeText
+        self.tone = snapshot.tone
         self.connectionStatus = connectionStatus
+    }
+    
+    func update(
+        with snapshot: SymbolPresentationSnapshot,
+        connectionStatus: ConnectionStatus
+    ) {
+        guard snapshot.symbolID == symbolID else {
+            assertionFailure("Attempted to update details view model with a different symbol.")
+            return
+        }
+        
+        priceText = snapshot.priceText
+        changeText = snapshot.changeText
+        tone = snapshot.tone
+        self.connectionStatus = connectionStatus
+    }
+    
+    func updateConnectionStatus(_ status: ConnectionStatus) {
+        connectionStatus = status
     }
 }

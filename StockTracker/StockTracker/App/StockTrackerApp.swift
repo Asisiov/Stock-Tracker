@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct StockTrackerApp: App {
-    
-    @State private var coordinator = MarketsCoordinator()
     var body: some Scene {
         WindowGroup {
-            MarketsCoordinatorView(coordinator: coordinator)
+            MarketsFeatureAssembly.makeCoordinatorView()
         }
     }
 }

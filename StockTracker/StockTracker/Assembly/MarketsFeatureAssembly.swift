@@ -5,13 +5,52 @@
 //  Created by Oleksandr on 04.04.2026.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK:  -  MarketsFeatureAssembly  -  -
 
 enum MarketsFeatureAssembly {
     @MainActor
-    static func makeSymbolsListView(onSelectSymbol: @escaping (String) -> Void) -> SymbolsListView {
+    static func makeCoordinatorView() -> some View {
+        let repository = makeRepository()
+
+        let presentationMapper = SymbolPresentationMapper(
+            priceFormatter: PriceFormatter(locale: .current),
+            priceChangeFormatter: PriceChangeFormatter(locale: .current)
+        )
+
+        let listViewModel = SymbolsListViewModel(
+            repository: repository,
+            presentationMapper: presentationMapper
+        )
+
+        let coordinator = MarketsCoordinator(
+            listViewModel: listViewModel
+        )
+
+        return MarketsCoordinatorView(
+            coordinator: coordinator
+        )
+    }
+
+    @MainActor
+    static func makeSymbolsListView(
+        viewModel: SymbolsListViewModel,
+        onSelectSymbol: @escaping (String) -> Void
+    ) -> some View {
+        SymbolsListView(
+            viewModel: viewModel,
+            onSelectSymbol: onSelectSymbol
+        )
+    }
+}
+
+// MARK:  -  Private  -  -
+
+private extension MarketsFeatureAssembly {
+    @MainActor
+    static func makeRepository() -> SymbolsRepositoryProtocol {
+        
         let symbolsLoader = SymbolsJSONLoader()
         var initialSymbols = [StockSymbol]()
         
@@ -28,25 +67,10 @@ enum MarketsFeatureAssembly {
         let priceFeedService = EchoPriceFeedService(
             webSocketClient: webSocketClient
         )
-
-        let repository = SymbolsRepository(
+        
+        return SymbolsRepository(
             symbols: initialSymbols,
             priceFeedService: priceFeedService
         )
-
-        let priceFormatter = PriceFormatter(locale: Locale(identifier: "en_US"))
-        let priceChangeFormatter = PriceChangeFormatter(locale: Locale(identifier: "en_US"))
-
-        let presentationMapper = SymbolPresentationMapper(
-            priceFormatter: priceFormatter,
-            priceChangeFormatter: priceChangeFormatter
-        )
-
-        let viewModel = SymbolsListViewModel(
-            repository: repository,
-            presentationMapper: presentationMapper
-        )
-
-        return SymbolsListView(viewModel: viewModel, onSelectSymbol: onSelectSymbol)
     }
 }

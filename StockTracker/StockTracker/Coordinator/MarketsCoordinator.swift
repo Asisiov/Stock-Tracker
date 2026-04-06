@@ -10,29 +10,59 @@ import SwiftUI
 @MainActor
 @Observable
 final class MarketsCoordinator {
-    var path: [MarketsRoute] = []
+    var path: [MarketsRoute] = [] {
+        didSet {
+            syncSelectionWithNavigation()
+        }
+    }
 
+    let listViewModel: SymbolsListViewModel
+    
+    init(listViewModel: SymbolsListViewModel) {
+        self.listViewModel = listViewModel
+    }
+    
     func showDetails(for symbolID: String) {
+        listViewModel.selectSymbol(id: symbolID)
         path.append(.symbolDetails(symbolID))
+    }
+    
+    func goBack() {
+        guard path.isEmpty == false else { return }
+        path.removeLast()
     }
 
     @ViewBuilder
     func destination(for route: MarketsRoute) -> some View {
         switch route {
         case .symbolDetails(let symbolID):
-            SymbolDetailsView(
-                viewModel: SymbolDetailsViewModel(
-                    symbolID: symbolID,
-                    ticker: "BRK.B",
-                    companyName: "Berkshire Hathaway",
-                    priceText: "$432.19",
-                    changeText: "+0.84",
-                    tone: .positive,
-                    aboutText: "Berkshire Hathaway Inc. engages in the insurance, freight rail transportation, and utility businesses worldwide.",
-                    connectionStatus: .disconnected
-                ), onBack: { [weak self] in
-                    self?.path.removeLast()
-                })
+            if let detailsViewModel = listViewModel.detailsViewModel,
+               detailsViewModel.symbolID == symbolID {
+                SymbolDetailsView(
+                    viewModel: detailsViewModel,
+                    onBack: { [weak self] in
+                        self?.goBack()
+                    }
+                )
+            } else {
+                Text("Details state is unavailable.")
+            }
         }
+    }
+}
+
+// MARK:  -  Private  -  -
+
+private extension MarketsCoordinator {
+    func syncSelectionWithNavigation() {
+        let hasDetailsRoute = path.contains { route in
+            switch route {
+            case .symbolDetails:
+                return true
+            }
+        }
+
+        guard hasDetailsRoute == false else { return }
+        listViewModel.clearSelection()
     }
 }
